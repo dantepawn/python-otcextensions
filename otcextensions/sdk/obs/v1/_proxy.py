@@ -274,8 +274,9 @@ class Proxy(sdk_proxy.Proxy):
                          requests_auth=self._get_req_auth(endpoint))
 
     def download_object(self, obj, container=None, **attrs):
-        """Download the data contained inside an object.
-
+        """Download or stream the data contained inside an object.
+        if file is not provided than stream the content otherwise download the obj
+        
         :param obj: The value can be the name of an object or a
                        :class:`~otcextensions.sdk.obs.v1.obj.Object` instance.
         :param container: The value can be the name of a container or a
@@ -294,7 +295,7 @@ class Proxy(sdk_proxy.Proxy):
             self,
             endpoint_override=endpoint,
             requests_auth=self._get_req_auth(endpoint),
-            filename=attrs.pop('file', '-'))
+            filename=attrs.pop('file', None))
 
     def stream_object(self, obj, container=None, chunk_size=1024, **attrs):
         """Stream the data contained inside an object.
