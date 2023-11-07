@@ -269,7 +269,9 @@ class Object(_base.BaseResource):
 
     def download(self, session, filename=None,
                  endpoint_override=None, requests_auth=None):
-
+        """ If filename is None return content of the file 
+            else download the file
+        """
         session = self._get_session(session)
 
         request = self._prepare_request(requires_id=True)
@@ -286,8 +288,11 @@ class Object(_base.BaseResource):
 
         _logger.debug(response.content)
 
-        with open(filename, 'wb') as f:
-            f.write(response.content)
+        if filename == None:
+            return response.content
+        else:
+            with open(filename, 'wb') as f:
+                f.write(response.content)
 
         return
 
