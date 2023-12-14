@@ -159,6 +159,8 @@ class Object(_base.BaseResource):
     #: Generally, it is a domain name
     origin = resource.Header("Origin", type=bool)
 
+    metatime = resource.Header("x-amz-meta-mtime", type=str)
+
     def __init__(self, data=None, **attrs):
         super(_base.BaseResource, self).__init__(**attrs)
         self.data = data
